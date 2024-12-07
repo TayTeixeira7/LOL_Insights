@@ -1,0 +1,2 @@
+1;Manuella;Jinx;Rota Inferior;Atirador;Summoner's Rift;
+3;João;Vi;Rota do Meio;Lutador;Aram;

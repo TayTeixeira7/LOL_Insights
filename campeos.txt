@@ -1,0 +1,3 @@
+Ahri;Mago;Média;Furto de Essência
+Jinx;Atirador;Média;velocidade de ataque
+Leblanc;Mago;Alta;Imagem-Espelho
