@@ -1,3 +1,0 @@
-1;Otavio;350;Ouro;867;
-2;Marcela;170;Platina;310;
-3;Daniel;173;Platina;340;

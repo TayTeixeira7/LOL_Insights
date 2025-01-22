@@ -5,7 +5,7 @@
 package view;
 
 
-import controller.ControllerArquivoTextoJogador;
+import controller.ControllerArquivoJogador;
 import javax.swing.JOptionPane;
 import model.Jogador;
 
@@ -15,7 +15,7 @@ import model.Jogador;
  */
 public class TelaJogador extends javax.swing.JFrame {
     
-    ControllerArquivoTextoJogador controle = new ControllerArquivoTextoJogador();
+    ControllerArquivoJogador controle = new ControllerArquivoJogador();
     Jogador jogador = new Jogador();
 
     /**
@@ -60,9 +60,9 @@ public class TelaJogador extends javax.swing.JFrame {
         });
 
         ButtonSairUser.setBackground(new java.awt.Color(0, 51, 51));
-        ButtonSairUser.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        ButtonSairUser.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         ButtonSairUser.setForeground(new java.awt.Color(255, 255, 255));
-        ButtonSairUser.setText("Sair");
+        ButtonSairUser.setText("Voltar");
         ButtonSairUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonSairUserActionPerformed(evt);
@@ -207,7 +207,7 @@ public class TelaJogador extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ButtonSairUser, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ButtonSairUser)
                         .addGap(52, 52, 52))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(160, 160, 160)
@@ -239,6 +239,8 @@ public class TelaJogador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonSairUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSairUserActionPerformed
+        TelaHome home = new TelaHome();
+        home.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ButtonSairUserActionPerformed
 
@@ -259,14 +261,16 @@ public class TelaJogador extends javax.swing.JFrame {
             if ((jTextFieldNome.getText().isEmpty()) || (jTextFieldNivel.getText().isEmpty()) || (jTextFieldRanking.getText().isEmpty()) || (jTextFieldVitorias.getText().isEmpty()) ) {
                 JOptionPane.showMessageDialog(this, "Os campos não podem retornar vazios");
             }
+
                 controle.gravaJogador(novoJogador);
-                JOptionPane.showMessageDialog(this, "Jogador salvo com sucesso!");
+                JOptionPane.showMessageDialog(this, "Jogador salvo com sucesso em jogadores.obj!");
                 
                 // limpa os campos novamente
                 jTextFieldNome.setText("");
                 jTextFieldNivel.setText("");
                 jTextFieldRanking.setText("");
                 jTextFieldVitorias.setText("");
+                
               
         } catch (Exception erro) {
                 JOptionPane.showMessageDialog(null, "ERRO AO CADASTRAR JOGADOR!");
@@ -296,6 +300,7 @@ public class TelaJogador extends javax.swing.JFrame {
     private void jButtonSalvarEdicaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSalvarEdicaoMouseClicked
         try {
             Jogador jogadorAtualizado = new Jogador();
+            
             jogadorAtualizado.setNome(jTextFieldNome.getText());
             jogadorAtualizado.setNivel(Integer.parseInt(jTextFieldNivel.getText()));
             jogadorAtualizado.setRanking(jTextFieldRanking.getText());
@@ -313,7 +318,6 @@ public class TelaJogador extends javax.swing.JFrame {
 
             // Chama o método de atualização
             controle.atualizaJogador(jogadorAtualizado);
-
             JOptionPane.showMessageDialog(this, "Jogador atualizado com sucesso!");
 
             // Limpa os campos após a atualização
@@ -322,6 +326,7 @@ public class TelaJogador extends javax.swing.JFrame {
             jTextFieldRanking.setText("");
             jTextFieldVitorias.setText("");
             jTextFieldID.setText("");
+                     
         
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao atualizar jogador: " + e.getMessage());

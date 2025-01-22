@@ -1,10 +1,10 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
 
-import controller.ControllerArquivoTextoPartidas;
+import controller.ControllerArquivoPartidas;
 import javax.swing.JOptionPane;
 import model.Partidas;
 
@@ -14,7 +14,7 @@ import model.Partidas;
  */
 public class TelaPartidas extends javax.swing.JFrame {
     
-    ControllerArquivoTextoPartidas controle = new ControllerArquivoTextoPartidas();
+    ControllerArquivoPartidas controle = new ControllerArquivoPartidas();
     Partidas partida = new Partidas();
 
     /**
@@ -62,9 +62,9 @@ public class TelaPartidas extends javax.swing.JFrame {
         jLabel1.setPreferredSize(new java.awt.Dimension(382, 41));
 
         ButtonSairUser.setBackground(new java.awt.Color(0, 51, 51));
-        ButtonSairUser.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        ButtonSairUser.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         ButtonSairUser.setForeground(new java.awt.Color(255, 255, 255));
-        ButtonSairUser.setText("Sair");
+        ButtonSairUser.setText("Voltar");
         ButtonSairUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonSairUserActionPerformed(evt);
@@ -116,13 +116,13 @@ public class TelaPartidas extends javax.swing.JFrame {
                     .addComponent(jTextFieldJogador, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabelTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(74, 74, 74)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelRota, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelIDPartida, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(jLabelIDPartida, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jComboBoxTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -204,7 +204,7 @@ public class TelaPartidas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ButtonSairUser, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ButtonSairUser)
                 .addGap(58, 58, 58))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,6 +239,8 @@ public class TelaPartidas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonSairUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSairUserActionPerformed
+        TelaHome home = new TelaHome();
+        home.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ButtonSairUserActionPerformed
 
@@ -258,7 +260,7 @@ public class TelaPartidas extends javax.swing.JFrame {
             }
 
             controle.gravarPartida(novaPartida);
-            JOptionPane.showMessageDialog(this, "Partida salva com sucesso!");
+            JOptionPane.showMessageDialog(this, "Partida salva com sucesso em partidas.obj!");
 
             // limpa os campos novamente
             jTextFieldJogador.setText("");
@@ -280,6 +282,7 @@ public class TelaPartidas extends javax.swing.JFrame {
     private void jButtonSalvarEdicaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSalvarEdicaoMouseClicked
         try {
             Partidas partidaAtualizada = new Partidas();
+            
             partidaAtualizada.setJogador(jTextFieldJogador.getText());
             partidaAtualizada.setCampeao(jTextFieldCampeao.getText());
             partidaAtualizada.setPosicao(String.valueOf(jComboBoxRota.getSelectedItem()));
@@ -296,7 +299,6 @@ public class TelaPartidas extends javax.swing.JFrame {
 
             // Chama o método de atualização
             controle.atualizarPartida(partidaAtualizada);
-
             JOptionPane.showMessageDialog(this, "Partida atualizada com sucesso!");
 
             // Limpa os campos após a atualização

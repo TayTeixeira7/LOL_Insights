@@ -202,31 +202,37 @@ public class TelaHome extends javax.swing.JFrame {
     private void ButtonJogadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonJogadoresActionPerformed
         TelaJogador telajogadores = new TelaJogador();
         telajogadores.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_ButtonJogadoresActionPerformed
 
     private void ButtonCampeoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCampeoesActionPerformed
         TelaCampeao telacampeoes = new TelaCampeao();
         telacampeoes.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_ButtonCampeoesActionPerformed
 
     private void ButtonBuscarJogadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonBuscarJogadorActionPerformed
         TelaBuscarJogador telaBuscaJog = new TelaBuscarJogador();
         telaBuscaJog.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_ButtonBuscarJogadorActionPerformed
 
     private void ButtonPartidas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPartidas1ActionPerformed
         TelaPartidas telapartida = new TelaPartidas();
         telapartida.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_ButtonPartidas1ActionPerformed
 
     private void ButtonBuscarCampeoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonBuscarCampeoesActionPerformed
         TelaBuscarCampeao telaBuscaCamp = new TelaBuscarCampeao();
         telaBuscaCamp.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_ButtonBuscarCampeoesActionPerformed
 
     private void ButtonBuscarPartidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonBuscarPartidasActionPerformed
         TelaBuscarPartidas telaBuscaPart = new TelaBuscarPartidas();
         telaBuscaPart.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_ButtonBuscarPartidasActionPerformed
 
     /**

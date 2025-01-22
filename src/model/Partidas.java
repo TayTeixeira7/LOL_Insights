@@ -8,7 +8,8 @@ package model;
  *
  * @author Taynara Garcia Teixeira
  */
-public class Partidas {
+public class Partidas implements java.io.Serializable{
+    private static long serialVersionUID = 1L;
     protected String jogador;
     protected String campeao;
     protected String posicao;

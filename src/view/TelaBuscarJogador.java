@@ -7,8 +7,9 @@ package view;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import controller.ControllerArquivoTextoJogador;
+import controller.ControllerArquivoJogador;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 import model.Jogador;
 
 /**
@@ -17,8 +18,8 @@ import model.Jogador;
  */
 public class TelaBuscarJogador extends javax.swing.JFrame {
     
-    ControllerArquivoTextoJogador controle = new ControllerArquivoTextoJogador();
-    Jogador jogador = new Jogador();
+    ControllerArquivoJogador controle = new ControllerArquivoJogador();
+    //Jogador jogador = new Jogador();
 
     /**
      * Creates new form TelaBuscarJogador
@@ -32,7 +33,7 @@ public class TelaBuscarJogador extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel)tabelaJogadores.getModel();
             model.setNumRows(0);
 
-            for(Jogador j: controle.getJogadores()){
+            for(Jogador j: controle.listaJogadores()){
                 model.addRow(new Object[]{
                         j.getId(),
                         j.getNome(),
@@ -83,9 +84,9 @@ public class TelaBuscarJogador extends javax.swing.JFrame {
         buscaJogador.setIconTextGap(5);
 
         buttonSair.setBackground(new java.awt.Color(0, 51, 51));
-        buttonSair.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        buttonSair.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buttonSair.setForeground(new java.awt.Color(255, 255, 255));
-        buttonSair.setText("Sair");
+        buttonSair.setText("Voltar");
         buttonSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSairActionPerformed(evt);
@@ -228,7 +229,7 @@ public class TelaBuscarJogador extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(buscaJogador)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonSair)
                 .addGap(29, 29, 29))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -247,6 +248,8 @@ public class TelaBuscarJogador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
+        TelaHome home = new TelaHome();
+        home.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_buttonSairActionPerformed
 
@@ -260,17 +263,17 @@ public class TelaBuscarJogador extends javax.swing.JFrame {
         List<Jogador> listaFiltrada = new ArrayList<>();
         
         if (pesquisa.isEmpty()) {
-            listaFiltrada = controle.getJogadores(); //se o campo estiver vazio, mostra todos os dados
+            listaFiltrada = controle.listaJogadores(); //se o campo estiver vazio, mostra todos os dados
         } else if (escolha.equals("Nome")) {
-            listaFiltrada = controle.getJogadores().stream()
+            listaFiltrada = controle.listaJogadores().stream()
                     .filter(j -> j.getNome().toLowerCase().contains(pesquisa))
-                    .toList();
+                    .collect(Collectors.toList());
         } else if (escolha.equals("Riot ID")) {
             try {
                 int idPesquisa = Integer.parseInt(pesquisa);
-                listaFiltrada = controle.getJogadores().stream()
+                listaFiltrada = controle.listaJogadores().stream()
                         .filter(j -> j.getId() == idPesquisa)
-                        .toList();
+                        .collect(Collectors.toList());
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Insira um código válido!", "Erro", JOptionPane.ERROR_MESSAGE);
             }
@@ -338,8 +341,8 @@ public class TelaBuscarJogador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLerMouseClicked
 
     private void jButtonLerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLerActionPerformed
-        controle.lerJogador(-1);
-        listaJogadores();
+        controle.lerJogadores();
+        listaJogadores();      
     }//GEN-LAST:event_jButtonLerActionPerformed
 
     /**
@@ -397,7 +400,7 @@ public class TelaBuscarJogador extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tabelaJogadores.getModel();
         model.setNumRows(0);
 
-        for (Jogador j : controle.getJogadores()) {
+        for (Jogador j : controle.listaJogadores()) {
             model.addRow(new Object[]{
                 j.getId(),
                 j.getNome(),

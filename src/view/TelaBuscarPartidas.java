@@ -7,8 +7,9 @@ package view;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import controller.ControllerArquivoTextoPartidas;
+import controller.ControllerArquivoPartidas;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 import model.Partidas;
 
 /**
@@ -17,8 +18,8 @@ import model.Partidas;
  */
 public class TelaBuscarPartidas extends javax.swing.JFrame {
     
-    ControllerArquivoTextoPartidas controle = new ControllerArquivoTextoPartidas();
-    Partidas partida = new Partidas();
+    ControllerArquivoPartidas controle = new ControllerArquivoPartidas();
+    //Partidas partida = new Partidas();
 
     /**
      * Creates new form TelaBuscarJogador
@@ -32,7 +33,7 @@ public class TelaBuscarPartidas extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel)tabelaPartidas.getModel();
             model.setNumRows(0);
 
-            for(Partidas p: controle.getPartidas()){
+            for(Partidas p: controle.listaPartidas()){
                 model.addRow(new Object[]{
                         p.getId(),
                         p.getJogador(),
@@ -84,9 +85,9 @@ public class TelaBuscarPartidas extends javax.swing.JFrame {
         buscaJogador.setIconTextGap(5);
 
         buttonSair.setBackground(new java.awt.Color(0, 51, 51));
-        buttonSair.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        buttonSair.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buttonSair.setForeground(new java.awt.Color(255, 255, 255));
-        buttonSair.setText("Sair");
+        buttonSair.setText("Voltar");
         buttonSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSairActionPerformed(evt);
@@ -233,7 +234,7 @@ public class TelaBuscarPartidas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(buscaJogador)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonSair)
                 .addGap(29, 29, 29))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -252,6 +253,8 @@ public class TelaBuscarPartidas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
+        TelaHome home = new TelaHome();
+        home.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_buttonSairActionPerformed
 
@@ -265,21 +268,21 @@ public class TelaBuscarPartidas extends javax.swing.JFrame {
         List<Partidas> listaFiltrada = new ArrayList<>();
         
         if (pesquisa.isEmpty()) {
-            listaFiltrada = controle.getPartidas(); //se o campo estiver vazio, mostra todos os dados
+            listaFiltrada = controle.listaPartidas(); //se o campo estiver vazio, mostra todos os dados
         } else if (escolha.equals("Jogador")) {
-            listaFiltrada = controle.getPartidas().stream()
+            listaFiltrada = controle.listaPartidas().stream()
                     .filter(p -> p.getJogador().toLowerCase().contains(pesquisa))
-                    .toList();
+                    .collect(Collectors.toList());
         } else if (escolha.equals("Campeão")) {
-            listaFiltrada = controle.getPartidas().stream()
+            listaFiltrada = controle.listaPartidas().stream()
                     .filter(p -> p.getCampeao().toLowerCase().contains(pesquisa))
-                    .toList();
+                    .collect(Collectors.toList());
         } else if (escolha.equals("ID")) {
             try {
                 int idPesquisa = Integer.parseInt(pesquisa);
-                listaFiltrada = controle.getPartidas().stream()
+                listaFiltrada = controle.listaPartidas().stream()
                         .filter(p -> p.getId() == idPesquisa)
-                        .toList();
+                        .collect(Collectors.toList());
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Insira um código válido!", "Erro", JOptionPane.ERROR_MESSAGE);
             }
@@ -348,7 +351,7 @@ public class TelaBuscarPartidas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLerMouseClicked
 
     private void jButtonLerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLerActionPerformed
-        controle.lerPartida(-1);
+        controle.lerPartidas();
         listaPartidas();
     }//GEN-LAST:event_jButtonLerActionPerformed
 
@@ -408,7 +411,7 @@ public class TelaBuscarPartidas extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tabelaPartidas.getModel();
         model.setNumRows(0);
 
-        for (Partidas p : controle.getPartidas()) {
+        for (Partidas p : controle.listaPartidas()) {
             model.addRow(new Object[]{
                 p.getId(),
                 p.getJogador(),

@@ -4,7 +4,7 @@
  */
 package view;
 
-import controller.ControllerArquivoTextoCampeao;
+import controller.ControllerArquivoCampeao;
 import javax.swing.JOptionPane;
 import model.Campeao;
 
@@ -14,7 +14,7 @@ import model.Campeao;
  */
 public class TelaCampeao extends javax.swing.JFrame {
     
-    ControllerArquivoTextoCampeao controle = new ControllerArquivoTextoCampeao();
+    ControllerArquivoCampeao controle = new ControllerArquivoCampeao();
     Campeao campeao = new Campeao();
 
     /**
@@ -59,9 +59,9 @@ public class TelaCampeao extends javax.swing.JFrame {
         jLabel1.setPreferredSize(new java.awt.Dimension(382, 41));
 
         ButtonSairUser.setBackground(new java.awt.Color(0, 51, 51));
-        ButtonSairUser.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        ButtonSairUser.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         ButtonSairUser.setForeground(new java.awt.Color(255, 255, 255));
-        ButtonSairUser.setText("Sair");
+        ButtonSairUser.setText("Voltar");
         ButtonSairUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonSairUserActionPerformed(evt);
@@ -180,7 +180,7 @@ public class TelaCampeao extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ButtonSairUser, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ButtonSairUser)
                 .addGap(52, 52, 52))
             .addGroup(layout.createSequentialGroup()
                 .addGap(175, 175, 175)
@@ -220,6 +220,8 @@ public class TelaCampeao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonSairUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSairUserActionPerformed
+        TelaHome home = new TelaHome();
+        home.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ButtonSairUserActionPerformed
 
@@ -238,7 +240,7 @@ public class TelaCampeao extends javax.swing.JFrame {
             }
             
             controle.gravarCampeao(novoCampeao);
-            JOptionPane.showMessageDialog(this, "Campeão salvo com sucesso!");
+            JOptionPane.showMessageDialog(this, "Campeão salvo com sucesso em campeões.obj!");
 
             // limpa os campos novamente
             jTextFieldNomeCamp.setText("");
@@ -259,6 +261,7 @@ public class TelaCampeao extends javax.swing.JFrame {
     private void jButtonSalvarEdicaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSalvarEdicaoMouseClicked
         try {
             Campeao campeaoAtualizado = new Campeao();
+            
             campeaoAtualizado.setNome(jTextFieldNomeCamp.getText());
             campeaoAtualizado.setFuncao(String.valueOf(jComboBoxFuncao.getSelectedItem()));
             campeaoAtualizado.setHabilidade(jTextFieldHabilidade.getText());
@@ -273,7 +276,6 @@ public class TelaCampeao extends javax.swing.JFrame {
 
             // Chama o método de atualização
             controle.atualizarCampeao(campeaoAtualizado);
-
             JOptionPane.showMessageDialog(this, "Campeão atualizado com sucesso!");
 
             // Limpa os campos após a atualização

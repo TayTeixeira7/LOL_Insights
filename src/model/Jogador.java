@@ -8,7 +8,8 @@ package model;
  *
  * @author Taynara Garcia Teixeira
  */
-public class Jogador {
+public class Jogador implements java.io.Serializable{
+    private static long serialVersionUID = 3L;
     protected int id;
     protected String nome;
     protected int nivel;

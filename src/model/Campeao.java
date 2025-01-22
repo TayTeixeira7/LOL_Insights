@@ -8,7 +8,8 @@ package model;
  *
  * @author Taynara Garcia Teixeira
  */
-public class Campeao {
+public class Campeao implements java.io.Serializable{
+    private static long serialVersionUID = 2L;
     protected String nome;
     protected String funcao;
     protected String dificuldade;
